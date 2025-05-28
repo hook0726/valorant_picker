@@ -1,0 +1,20 @@
+<%= link_to "Home", root_path %>
+<h1>プレイヤー一覧</h1>
+<%= link_to "New player", new_player_path, class: "button" %>
+
+<div class="player-list">
+  <% @players.each do |player| %>
+    <div class="player-card">
+      <strong><%= player.name %></strong><br>
+      <%= link_to "Edit", edit_player_path(player) %>
+      <%= link_to "Delete", player, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+
+      <div class="agent-list">
+        <% player.available_agents.each do |available_agent| %>
+          <span><%= available_agent.agent.name %></span>
+          <%= image_tag available_agent.agent.image_url %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

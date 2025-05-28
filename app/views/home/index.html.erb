@@ -1,0 +1,12 @@
+<!-- app/views/home/index.html.erb -->
+<div class="home-container">
+  <h1 class="home-title">ようこそ</h1>
+  <p class="home-description">
+    このアプリでは、プレイヤーを登録して、マップに応じた最適な構成を探せます。
+  </p>
+
+  <div class="home-links">
+    <%= link_to "構成を検索する", team_builds_path, class: "home-button" %><br>
+    <%= link_to "プレイヤー一覧", players_path, class: "home-button" %>
+  </div>
+</div>

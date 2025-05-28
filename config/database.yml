@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres   # ← ここは自分のPostgreSQLユーザー名に
+  password:                    # ← パスワードがあるなら記入
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: valorant_picker_development
+
+test:
+  <<: *default
+  database: valorant_picker_test
+
+production:
+  <<: *default
+  database: valorant_picker_production

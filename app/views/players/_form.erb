@@ -1,0 +1,38 @@
+<%= form_with model: @player do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <h3>Available Agents</h3>
+    <div>
+      <%= check_box_tag 'select_all', '', false, id: 'select_all' %>
+      <%= label_tag 'select_all', '全て選択/解除' %>
+    </div>
+
+    <% Agent.all.each do |agent| %>
+      <% checkbox_id = "agent_checkbox_#{agent.id}" %>
+      <label class="agent-checkbox-wrapper" for="<%= checkbox_id %>">
+        <%= check_box_tag "player[agent_ids][]", agent.id, @player.agents.include?(agent), id: checkbox_id, class: "agent_checkbox" %>
+        <%= image_tag agent.image_url, alt: agent.name, class: "agent-image" %>
+        <span><%= agent.name %></span>
+      </label>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const selectAll = document.getElementById("select_all");
+    const checkboxes = document.querySelectorAll(".agent_checkbox");
+
+    selectAll.addEventListener("change", function() {
+      checkboxes.forEach(cb => cb.checked = selectAll.checked);
+    });
+  });
+</script>

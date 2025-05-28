@@ -1,0 +1,43 @@
+<%= link_to "Home", root_path, class: "back-link" %>
+
+<h1 class="page-title">構成検索フォーム</h1>
+
+<%= form_with url: search_team_builds_path, method: :get, local: true, class: "team-form" do |f| %>
+  <div class="form-group">
+    <label for="map">マップを選択</label>
+    <%= select_tag :map_id, options_from_collection_for_select(@maps, :id, :name), include_blank: true, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <label>プレイヤーを5人選択</label>
+    <% 5.times do %>
+      <%= select_tag "player_ids[]", options_from_collection_for_select(@players, :id, :name), include_blank: true, class: "form-select" %>
+    <% end %>
+  </div>
+
+  <%= f.submit "構成を検索", class: "submit-button" %>
+
+  <% if @suggested_composition %>
+  
+    <h3 class="result-title">おすすめ構成（<%= @suggested_composition.team_name %>）</h3>
+    <p>
+    試合: <%= @suggested_composition.match.title %><br>
+    マップ： <%= @suggested_composition.map.name %><br>
+    チーム名: <%= @suggested_composition.team_name %><br>
+    対戦: <%= @suggested_composition.match.team1 %> vs <%= @suggested_composition.match.team2 %><br>
+    結果: <%= @suggested_composition.match.result %><br>
+    日時: <%= @suggested_composition.match.match_time.strftime('%Y/%m/%d %H:%M') %><br>
+    パッチ： <%= @suggested_composition.match.patch %><br>
+    </p>
+    <ul class="result-list">
+      <% @players.each_with_index do |player, i| %>
+        <% agent = Agent.find(@agent_assignments[i]) %>
+        <li>
+        <%= player.name %>:
+        <%= @suggested_composition.composition_picks.find_by(agent_id: agent.id).player_name %>→
+        <%= agent.name %><%= image_tag agent.image_url %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  subtitle: MyString
+  tean1: MyString
+  team2: MyString
+  result: MyString
+  date: 2025-05-04
+  map1: MyString
+  map2: MyString
+  map3: MyString
+
+two:
+  title: MyString
+  subtitle: MyString
+  tean1: MyString
+  team2: MyString
+  result: MyString
+  date: 2025-05-04
+  map1: MyString
+  map2: MyString
+  map3: MyString
