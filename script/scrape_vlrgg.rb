@@ -1,5 +1,6 @@
 require 'chrome_remote'
 require 'nokogiri'
+require_relative '../config/environment'
 
 def wait_for_complete
     loop do
@@ -49,7 +50,7 @@ end
 @chrome.send_cmd 'Page.navigate', url: 'https://www.vlr.gg/matches/results'
 wait_for_complete
 page_number = 1
-while(page_number < 10)
+while(page_number < 50)
     result_links = get_all_result_links
     result_links.each_with_index do |link, result_index|
         @chrome.send_cmd("Runtime.evaluate", expression: "document.querySelectorAll('a.wf-module-item')[#{result_index}].click()")

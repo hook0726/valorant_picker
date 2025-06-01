@@ -7,8 +7,8 @@
     <div class="player-card">
       <strong><%= player.name %></strong><br>
       <%= link_to "Edit", edit_player_path(player) %>
-      <%= link_to "Delete", player, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-
+      <%= button_to "Delete", player_path(player), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+      
       <div class="agent-list">
         <% player.available_agents.each do |available_agent| %>
           <span><%= available_agent.agent.name %></span>

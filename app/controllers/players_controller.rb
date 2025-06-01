@@ -20,7 +20,7 @@ class PlayersController < ApplicationController
         @player.available_agents.create(agent_id: agent_id)
       end
 
-      redirect_to @player
+      redirect_to players_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class PlayersController < ApplicationController
 
   def update
     if @player.update(player_params)
-        redirect_to @player
+        redirect_to players_path, notice: "更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
