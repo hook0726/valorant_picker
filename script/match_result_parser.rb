@@ -24,6 +24,7 @@ Dir.glob(Rails.root.join('tmp/match_result_html/*.html')) do |file|
     team2 = match_header.css('a.match-header-link.wf-link-hover.mod-2').text.gsub(/\s+/, ' ').strip
     result = match_header.css('div.match-header-vs-score div.js-spoiler').text.gsub(/\s+/, ' ').strip
     map_names = []
+    url = 'https://www.vlr.gg/' + File.basename(f.path).match(/\d+/)[0].to_s
     match = Match.create!(
       title: title,
       subtitle: subtitle,
@@ -31,7 +32,8 @@ Dir.glob(Rails.root.join('tmp/match_result_html/*.html')) do |file|
       patch: patch,
       team1: team1,
       team2: team2,
-      result: result
+      result: result,
+      url: url
     )
     match_description.css('div.vm-stats-game').each do |map_section|
       map_name = map_section.css('div.map > div > span').text.gsub(/\s+/, ' ').strip.split()[0]

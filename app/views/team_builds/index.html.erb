@@ -36,6 +36,7 @@
     結果: <%= @suggested_composition.match.result %><br>
     日時: <%= @suggested_composition.match.match_time.strftime('%Y/%m/%d %H:%M') %><br>
     パッチ： <%= @suggested_composition.match.patch %><br>
+    vlr.gg URL: <%= link_to @suggested_composition.match.url, @suggested_composition.match.url, target: "_blank" %>
     </p>
     <ul class="result-list">
       <% @players.each_with_index do |player, i| %>
